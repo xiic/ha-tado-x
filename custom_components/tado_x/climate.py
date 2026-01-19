@@ -119,7 +119,9 @@ class TadoXClimate(CoordinatorEntity[TadoXDataUpdateCoordinator], ClimateEntity)
         room = self._room
         if not room:
             return None
-        if room.power == "OFF":
+        # Only hide target temp if truly OFF (manual control with power OFF)
+        # In AUTO mode with power OFF (idle), still show the schedule target
+        if room.power == "OFF" and room.manual_control_active:
             return None
         return room.target_temperature
 
@@ -143,14 +145,18 @@ class TadoXClimate(CoordinatorEntity[TadoXDataUpdateCoordinator], ClimateEntity)
             room.manual_control_active,
         )
 
-        if room.power == "OFF":
+        # If manual control is active with power OFF, it's truly OFF
+        # (user explicitly turned off the heating)
+        if room.power == "OFF" and room.manual_control_active:
             return HVACMode.OFF
 
-        # If manual control is active, return HEAT
+        # If manual control is active with power ON, it's HEAT mode
         if room.manual_control_active:
             return HVACMode.HEAT
 
         # Otherwise, it's following the schedule (AUTO)
+        # Even if power is "OFF" (idle because target temp reached),
+        # the mode is still AUTO since it's controlled by the schedule
         return HVACMode.AUTO
 
     @property

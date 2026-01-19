@@ -187,22 +187,26 @@ Tado X devices use a different API than previous Tado generations. While Tado re
 - **Failed pairing attempts** with cryptic error messages
 - **Tado's official solution** requires a [full device reset](https://help.tado.com/en/articles/10264695-how-can-i-fix-matter-device-linking-errors) - impractical for remote installations (vacation homes, rental properties, elderly parents' homes)
 
-This integration uses Tado's official cloud API to provide reliable Home Assistant integration for Tado X users who:
-- Cannot get Matter integration working
-- Have remote installations where physical device reset isn't feasible
-- Prefer cloud-based API control with smart quota management
-- Need features not available through Matter (presets, temperature offset, Energy IQ)
-- Want full Home Assistant integration capabilities
+### Why Not an Official Home Assistant Integration?
 
-### A Note to Tado
+The Home Assistant team has chosen not to add Tado X support to the official Tado integration. Based on community discussions, this decision was made at Tado's request - they don't want third-party integrations using their cloud API because "it costs them money".
 
-We appreciate Tado's commitment to smart home standards like Matter. However, the current Matter implementation challenges highlight the importance of **local API access**. Many smart home enthusiasts would welcome a local API on the Tado X Bridge, similar to what other manufacturers provide. This would:
-- Eliminate cloud dependency for basic operations
-- Improve response times and reliability
-- Provide a fallback when Matter pairing fails
-- Respect user privacy and data sovereignty
+But here's the thing: **users pay for this API access**. We buy Tado devices knowing an API exists. Many of us pay an additional Auto-Assist subscription specifically for extended API access. So why restrict how we use what we're already paying for?
 
-We hope Tado considers this for future firmware updates. The smart home community would be grateful!
+The only official alternative is Matter, which is extremely limited compared to Tado's own app:
+- No boost mode or presets
+- No temperature offset calibration
+- No Energy IQ or meter readings
+- No detailed heating statistics
+- No child lock controls
+
+And unlike most smart home manufacturers, Tado provides **no local API** - neither on their classic devices nor on the new Tado X line. This leaves cloud API as the only way to get full functionality.
+
+**This is why ha-tado-x exists.** This integration uses Tado's official cloud API to provide what paying customers deserve: full Home Assistant integration for Tado X users who:
+- Cannot get Matter working (greyed-out buttons, failed pairing)
+- Have remote installations where device resets aren't feasible
+- Need features that Matter simply doesn't support
+- Want to actually use the API they're paying for
 
 ## Support the Project
 

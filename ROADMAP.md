@@ -23,6 +23,9 @@ This document tracks planned features and enhancements for the Tado X Home Assis
 - **Historic Data** - Historical temperature, humidity, and heating data
 - **Schedule Management** - Read and modify heating schedules from Home Assistant
 - **Graceful Rate Limit Handling** - Show "Rate Limited" state when 429 received and auto-suspend polling until reset
+  - Suggested by: @TexTown
+  - Issue: [#17](https://github.com/exabird/ha-tado-x/issues/17)
+  - Date: 2026-01-19
 
 ### P4 - Low Priority
 

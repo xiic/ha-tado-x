@@ -6,21 +6,32 @@ This document tracks planned features and enhancements for the Tado X Home Assis
 
 ### P1 - Critical Priority
 
-- **🔥 Local Control Mode** - Control Tado devices locally via HomeKit protocol
-  - Zero cloud dependency for temperature control and on/off commands
+- **🔥 Local Control Mode** - Control Tado X devices locally via Thread/Matter
+  - Zero cloud dependency - works even when Tado servers are down
   - No API rate limits - unlimited updates
-  - Instant response times (~50ms vs ~500ms cloud)
-  - Works even when Tado cloud is down
-  - Real-time state updates via Server-Sent Events (SSE)
-  - Local SQLite storage for state history
+  - Ultra-fast response times (~10-50ms vs ~500ms cloud)
+  - Real-time state updates
+  - Full local temperature control
 
-  **How it works:** Tado bridges expose a HomeKit interface on your local network. By pairing with this interface, we can send commands directly to devices without going through Tado's servers.
+  **How it works:** Tado X devices use the Thread protocol with Matter support. The Bridge X acts as a Thread Border Router, enabling direct IPv6 communication with all devices on your local network. Tado officially supports local control via Matter: *"The devices continue to work even without a connection to the Tado cloud."*
+
+  **What's possible:**
+  - Temperature control ✓
+  - On/Off switching ✓
+  - Home/Away modes ✓
+  - Heating schedules (Matter 1.4+) ✓
+  - Real-time state monitoring ✓
+
+  **Technical approaches:**
+  1. **Matter integration** - Native Matter protocol (most promising)
+  2. **HomeKit bridge** - Via [TadoLocal](https://github.com/AmpScm/TadoLocal) project
+  3. **Thread direct** - Direct IPv6 communication with Thread devices
 
   **Requirements:**
-  - One-time HomeKit bridge pairing setup
-  - Bridge and Home Assistant on same local network
+  - Bridge X and Home Assistant on same local network
+  - One-time Matter/HomeKit pairing setup
 
-  **Status:** Research phase - evaluating [TadoLocal](https://github.com/AmpScm/TadoLocal) implementation
+  **Status:** Research phase - investigating Matter and Thread integration options
 
 ### P2 - High Priority
 

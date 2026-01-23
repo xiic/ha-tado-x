@@ -53,6 +53,11 @@ This document tracks planned features and enhancements for the Tado X Home Assis
 
 ### P3 - Medium Priority
 
+- **🏷️ Improved Flow Sensor Naming** - More descriptive entity names for flow temperature sensors
+  - Rename `_none` entities to include "flow" prefix (e.g., `flow_max_temperature`, `flow_auto_adapt`)
+  - Better discoverability for OpenTherm flow temperature controls
+  - Requested by: @TexTown (#26)
+
 - **🌡️ Historic Data** - Historical temperature, humidity, and heating data
   - Temperature graphs in HA
   - Long-term statistics integration

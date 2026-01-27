@@ -42,6 +42,7 @@ class TadoXMaxFlowTemperature(CoordinatorEntity[TadoXDataUpdateCoordinator], Num
     _attr_icon = "mdi:thermometer-water"
     _attr_native_unit_of_measurement = UnitOfTemperature.CELSIUS
     _attr_mode = NumberMode.SLIDER
+    _attr_name = "Max Flow Temperature"
 
     def __init__(self, coordinator: TadoXDataUpdateCoordinator) -> None:
         """Initialize the max flow temperature entity."""

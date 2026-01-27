@@ -231,6 +231,7 @@ class TadoXFlowTempAutoAdaptationSwitch(CoordinatorEntity[TadoXDataUpdateCoordin
     _attr_device_class = SwitchDeviceClass.SWITCH
     _attr_icon = "mdi:auto-fix"
     _attr_translation_key = "flow_temp_auto_adaptation"
+    _attr_name = "Flow Temp Auto-Adaptation"
 
     def __init__(self, coordinator: TadoXDataUpdateCoordinator) -> None:
         """Initialize the switch entity."""

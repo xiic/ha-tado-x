@@ -53,10 +53,16 @@ This document tracks planned features and enhancements for the Tado X Home Assis
 
 ### P3 - Medium Priority
 
-- **🏷️ Improved Flow Sensor Naming** - More descriptive entity names for flow temperature sensors
-  - Rename `_none` entities to include "flow" prefix (e.g., `flow_max_temperature`, `flow_auto_adapt`)
-  - Better discoverability for OpenTherm flow temperature controls
-  - Requested by: @TexTown (#26)
+- **🔥 Zone Controller Toggle (Passive Heating Mode)** - Per-room control of boiler "call for heat"
+  - Toggle Zone Controller association per room to enable "passive heating"
+  - When disabled: room valves open based on setpoints but don't trigger the boiler relay
+  - Use case: Let rooms benefit from heat generated for other rooms without independent boiler calls
+  - New select entity or switch per room to control Zone Controller state
+  - Requested by: @polamoros (#29)
+
+- **🏷️ Improved Flow Sensor Naming** - ~~More descriptive entity names for flow temperature sensors~~ ✅ Fixed in v1.8.5
+  - ~~Rename `_none` entities to include "flow" prefix~~
+  - Requested by: @TexTown (#26), @xiic (#21)
 
 - **🌡️ Historic Data** - Historical temperature, humidity, and heating data
   - Temperature graphs in HA

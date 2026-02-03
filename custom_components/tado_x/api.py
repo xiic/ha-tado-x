@@ -175,11 +175,9 @@ class TadoXApi:
             quota_match = re.search(r"q=(\d+)", policy_header)
             if quota_match:
                 self._api_quota_limit = int(quota_match.group(1))
-                # Auto-detect Auto-Assist based on quota (20000 = Auto-Assist, 100 = free)
-                if self._api_quota_limit >= 20000:
-                    self._has_auto_assist = True
-                elif self._api_quota_limit <= 100:
-                    self._has_auto_assist = False
+                # Note: We no longer auto-detect Auto-Assist based on quota headers
+                # The user's manual setting in options should be respected
+                # API header values are used for display purposes only
 
         # Parse ratelimit header for remaining requests
         ratelimit_header = headers.get("ratelimit", "")

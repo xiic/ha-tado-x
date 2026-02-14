@@ -90,10 +90,6 @@ set_eiq_tariff:
 set_climate_timer:
   name: Set climate timer
   description: Set a room temperature for a specific duration. Useful for temporary overrides like a quick boost or extending heating.
-  target:
-    entity:
-      integration: tado_x
-      domain: climate
   fields:
     entity_id:
       name: Climate entity

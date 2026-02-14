@@ -50,6 +50,28 @@ A Home Assistant custom integration for **Tado X** devices (the new generation o
 - **Away**: Manually set presence to Away (override geofencing)
 - **Auto (Geofencing)**: Enable automatic presence detection
 
+### Climate Temperature Control (Advanced)
+
+When calling Home Assistant's `climate.set_temperature` on a Tado X climate entity, you can now pass these optional fields:
+
+- **termination_type**: How long the manual override should stay active.
+  - `TIMER` (default): Override expires after `duration`
+  - `MANUAL`: Override stays active until manually changed
+  - `NEXT_TIME_BLOCK`: Override lasts until the next schedule block
+- **duration**: Override duration in minutes when `termination_type: TIMER` is used (default: `30`)
+
+Example:
+
+```yaml
+service: climate.set_temperature
+target:
+  entity_id: climate.living_room
+data:
+  temperature: 21.5
+  termination_type: TIMER
+  duration: 30
+```
+
 ### Quick Actions (Buttons)
 
 Home-level controls for managing all zones at once:

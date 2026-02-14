@@ -87,6 +87,7 @@ Home-level controls for managing all zones at once:
   - Supports both m³ (gas) and kWh (electricity) units
   - Define tariff periods with start/end dates
   - Enables accurate cost tracking in Tado's Energy IQ dashboard
+- **set_climate_timer**: Set room temperature with optional termination_type (TIMER, MANUAL, NEXT_TIME_BLOCK)
 
 ### API Usage Monitoring
 

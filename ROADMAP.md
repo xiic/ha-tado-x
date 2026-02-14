@@ -35,6 +35,17 @@ This document tracks planned features and enhancements for the Tado X Home Assis
 
 ### P2 - High Priority
 
+- **🔥 Heat Pump Optimizer / DHW Control** - Hot water and boiler temperature control
+  - Boost / disable / resume hot water via buttons
+  - Heat pump optimizer temperature control
+  - DHW setpoint adjustment
+  - Requested by: @JayTBennett (#50), @jordypaulussen (#46, #49), @mike-vention, @donalfenwick (has working prototype)
+
+- **⏰ Configurable API Reset Time** - Auto-detect or manually set quota reset time
+  - Auto-detect from `t=` parameter in rate-limited API responses
+  - Manual override via integration options
+  - Requested by: @LeroyK (#47), @TexTown, @nikbyte (#48)
+
 - **📊 Energy IQ Dashboard** - Gas consumption and cost tracking
   - Daily/weekly/monthly consumption sensors
   - Cost estimates based on configured tariffs
@@ -101,6 +112,8 @@ This document tracks planned features and enhancements for the Tado X Home Assis
 See [CHANGELOG](https://github.com/exabird/ha-tado-x/releases) for completed features by version.
 
 **Recent highlights:**
+- v1.8.11 - Fix entity translations for non-English languages (Italian, German)
+- v1.8.10 - Fix: TR04 is Wireless Receiver X, not Thermostat X
 - v1.8.1 - Fix entity naming, add flow temp toggle option
 - v1.8.0 - Flow Temperature Optimization (max flow temp control, auto-adaptation switch)
 - v1.7.1 - Fix set_climate_timer validation for non-Tado entities

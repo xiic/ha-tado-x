@@ -259,8 +259,9 @@ class TadoXClimate(CoordinatorEntity[TadoXDataUpdateCoordinator], ClimateEntity)
         if temperature is None:
             return
 
-        termination_type = kwargs.get("termination_type", TERMINATION_TIMER)
-        duration_minutes = kwargs.get("duration", DEFAULT_TIMER_DURATION_MINUTES)
+        defaults = self.coordinator.get_room_control_defaults(self._room_id)
+        termination_type = kwargs.get("termination_type", defaults.termination_type)
+        duration_minutes = kwargs.get("duration", defaults.duration_minutes)
 
         await self.coordinator.api.set_room_temperature(
             self._room_id,

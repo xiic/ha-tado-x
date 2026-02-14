@@ -18,7 +18,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import (
-    DEFAULT_TIMER_DURATION,
+    DEFAULT_TIMER_DURATION_MINUTES,
     DOMAIN,
     MAX_TEMP,
     MIN_TEMP,
@@ -259,11 +259,14 @@ class TadoXClimate(CoordinatorEntity[TadoXDataUpdateCoordinator], ClimateEntity)
         if temperature is None:
             return
 
+        termination_type = kwargs.get("termination_type", TERMINATION_TIMER)
+        duration_minutes = kwargs.get("duration", DEFAULT_TIMER_DURATION_MINUTES)
+
         await self.coordinator.api.set_room_temperature(
             self._room_id,
             temperature=temperature,
-            termination_type=TERMINATION_TIMER,
-            duration_seconds=DEFAULT_TIMER_DURATION,
+            termination_type=termination_type,
+            duration_seconds=duration_minutes * 60,
         )
         await self.coordinator.async_request_refresh()
 

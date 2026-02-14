@@ -32,6 +32,9 @@ from .const import (
     CONF_TOKEN_EXPIRY,
     DOMAIN,
     PLATFORMS,
+    TERMINATION_MANUAL,
+    TERMINATION_NEXT_TIME_BLOCK,
+    TERMINATION_TIMER,
 )
 from .coordinator import TadoXDataUpdateCoordinator
 
@@ -55,6 +58,7 @@ SERVICE_SET_CLIMATE_TIMER: Final = "set_climate_timer"
 ATTR_ENTITY_ID: Final = "entity_id"
 ATTR_TEMPERATURE: Final = "temperature"
 ATTR_DURATION: Final = "duration"
+ATTR_TERMINATION_TYPE: Final = "termination_type"
 
 # Service schemas
 SERVICE_SET_TEMPERATURE_OFFSET_SCHEMA = vol.Schema(
@@ -93,6 +97,9 @@ SERVICE_SET_CLIMATE_TIMER_SCHEMA = vol.Schema(
         vol.Required(ATTR_DURATION): vol.All(
             vol.Coerce(int),
             vol.Range(min=1, max=1440),  # 1 minute to 24 hours
+        ),
+        vol.Optional(ATTR_TERMINATION_TYPE, default=TERMINATION_TIMER): vol.In(
+            [TERMINATION_TIMER, TERMINATION_MANUAL, TERMINATION_NEXT_TIME_BLOCK]
         ),
     }
 )
@@ -330,6 +337,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         entity_id = call.data[ATTR_ENTITY_ID]
         temperature = call.data[ATTR_TEMPERATURE]
         duration_minutes = call.data[ATTR_DURATION]
+        termination_type = call.data.get(ATTR_TERMINATION_TYPE, TERMINATION_TIMER)
 
         # Get the entity from registry
         from homeassistant.helpers import entity_registry as er
@@ -374,7 +382,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 room_id=room_id,
                 temperature=temperature,
                 power="ON",
-                termination_type="TIMER",
+                termination_type=termination_type,
                 duration_seconds=duration_seconds,
             )
             await coordinator.async_request_refresh()

@@ -126,3 +126,18 @@ set_climate_timer:
           max: 1440
           step: 1
           unit_of_measurement: "min"
+    termination_type:
+      name: Termination type
+      description: How long the override should stay active
+      required: false
+      default: "TIMER"
+      example: "TIMER"
+      selector:
+        select:
+          options:
+            - label: "Timer"
+              value: "TIMER"
+            - label: "Manual"
+              value: "MANUAL"
+            - label: "Next time block"
+              value: "NEXT_TIME_BLOCK"

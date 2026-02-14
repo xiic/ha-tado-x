@@ -40,6 +40,8 @@ A Home Assistant custom integration for **Tado X** devices (the new generation o
 | **Switches** | **Child lock** (per device), **Open window** control (per room) |
 | **Buttons** | **Boost All**, **Turn Off All**, **Resume Schedules** (quick actions) |
 | **Device Tracker** | **Mobile devices** for geofencing (home/away status) |
+| **Number** | **Timer duration** (per room default for manual temperature overrides) |
+| **Select** | **Termination type** (per room default: TIMER, MANUAL, NEXT_TIME_BLOCK) |
 | **Services** | Temperature offset, Meter reading, **Energy tariff** (Energy IQ) |
 
 ### Climate Presets
@@ -49,28 +51,6 @@ A Home Assistant custom integration for **Tado X** devices (the new generation o
 - **Home**: Manually set presence to Home (override geofencing)
 - **Away**: Manually set presence to Away (override geofencing)
 - **Auto (Geofencing)**: Enable automatic presence detection
-
-### Climate Temperature Control (Advanced)
-
-When calling Home Assistant's `climate.set_temperature` on a Tado X climate entity, you can now pass these optional fields:
-
-- **termination_type**: How long the manual override should stay active.
-  - `TIMER` (default): Override expires after `duration`
-  - `MANUAL`: Override stays active until manually changed
-  - `NEXT_TIME_BLOCK`: Override lasts until the next schedule block
-- **duration**: Override duration in minutes when `termination_type: TIMER` is used (default: `30`)
-
-Example:
-
-```yaml
-service: climate.set_temperature
-target:
-  entity_id: climate.living_room
-data:
-  temperature: 21.5
-  termination_type: TIMER
-  duration: 30
-```
 
 ### Quick Actions (Buttons)
 
@@ -88,6 +68,13 @@ Home-level controls for managing all zones at once:
   - Define tariff periods with start/end dates
   - Enables accurate cost tracking in Tado's Energy IQ dashboard
 - **set_climate_timer**: Set room temperature with optional termination_type (TIMER, MANUAL, NEXT_TIME_BLOCK)
+
+### Per-Room Default Controls
+
+These config entities let you set defaults used by the standard climate UI when it does not provide custom parameters:
+
+- **Timer Duration (number)**: Default duration (minutes) for manual temperature overrides
+- **Termination Type (select)**: Default termination type for manual overrides
 
 ### API Usage Monitoring
 

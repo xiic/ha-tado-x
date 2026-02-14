@@ -11,7 +11,13 @@ from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .api import TadoXApi, TadoXApiError, TadoXAuthError, TadoXRateLimitError
-from .const import DOMAIN, SCAN_INTERVAL_AUTO_ASSIST, SCAN_INTERVAL_FREE_TIER
+from .const import (
+    DEFAULT_TIMER_DURATION_MINUTES,
+    DOMAIN,
+    SCAN_INTERVAL_AUTO_ASSIST,
+    SCAN_INTERVAL_FREE_TIER,
+    TERMINATION_TIMER,
+)
 
 if TYPE_CHECKING:
     from homeassistant.config_entries import ConfigEntry
@@ -58,6 +64,14 @@ class TadoXRoom:
     devices: list[TadoXDevice] = field(default_factory=list)
     # Running times data (heating duration today)
     running_time_today_seconds: int = 0
+
+
+@dataclass
+class TadoXRoomControlDefaults:
+    """Default control settings for a room."""
+
+    termination_type: str = TERMINATION_TIMER
+    duration_minutes: int = DEFAULT_TIMER_DURATION_MINUTES
 
 
 @dataclass
@@ -164,6 +178,7 @@ class TadoXDataUpdateCoordinator(DataUpdateCoordinator[TadoXData]):
         self.api.home_id = home_id
         self._save_api_stats_callback = save_api_stats_callback
         self._scan_interval = scan_interval
+        self.room_control_defaults: dict[int, TadoXRoomControlDefaults] = {}
 
         # Feature toggles for optional API calls
         self.enable_weather = enable_weather
@@ -201,6 +216,28 @@ class TadoXDataUpdateCoordinator(DataUpdateCoordinator[TadoXData]):
         if self.enable_running_times:
             calls += 1
         return calls
+
+    def get_room_control_defaults(self, room_id: int) -> TadoXRoomControlDefaults:
+        """Return per-room control defaults, creating them if missing."""
+        defaults = self.room_control_defaults.get(room_id)
+        if defaults is None:
+            defaults = TadoXRoomControlDefaults()
+            self.room_control_defaults[room_id] = defaults
+        return defaults
+
+    def set_room_control_defaults(
+        self,
+        room_id: int,
+        *,
+        termination_type: str | None = None,
+        duration_minutes: int | None = None,
+    ) -> None:
+        """Update per-room control defaults."""
+        defaults = self.get_room_control_defaults(room_id)
+        if termination_type is not None:
+            defaults.termination_type = termination_type
+        if duration_minutes is not None:
+            defaults.duration_minutes = duration_minutes
 
     async def _async_update_data(self) -> TadoXData:
         """Fetch data from Tado X API."""

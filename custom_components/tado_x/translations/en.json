@@ -152,6 +152,9 @@
       "device_temperature": {
         "name": "Device Temperature"
       },
+      "temperature_offset": {
+        "name": "Temperature Offset"
+      },
       "api_calls_today": {
         "name": "API calls today"
       },
@@ -166,6 +169,27 @@
       },
       "api_reset_time": {
         "name": "API reset time"
+      },
+      "api_status": {
+        "name": "API Status",
+        "state": {
+          "OK": "OK",
+          "RATE_LIMITED": "Rate Limited"
+        }
+      },
+      "presence_state": {
+        "name": "Presence",
+        "state": {
+          "HOME": "Home",
+          "AWAY": "Away"
+        }
+      },
+      "presence_mode": {
+        "name": "Presence Mode",
+        "state": {
+          "MANUAL": "Manual",
+          "AUTO": "Auto (Geofencing)"
+        }
       },
       "outdoor_temperature": {
         "name": "Outdoor Temperature"
@@ -230,6 +254,9 @@
       },
       "open_window": {
         "name": "Open Window"
+      },
+      "flow_temp_auto_adaptation": {
+        "name": "Flow Temp Auto-Adaptation"
       }
     },
     "button": {
@@ -241,6 +268,11 @@
       },
       "resume_schedules": {
         "name": "Resume Schedules"
+      }
+    },
+    "number": {
+      "max_flow_temperature": {
+        "name": "Max Flow Temperature"
       }
     },
     "device_tracker": {

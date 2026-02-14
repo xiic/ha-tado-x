@@ -152,6 +152,9 @@
       "device_temperature": {
         "name": "Gerätetemperatur"
       },
+      "temperature_offset": {
+        "name": "Temperatur-Offset"
+      },
       "api_calls_today": {
         "name": "API-Aufrufe heute"
       },
@@ -166,6 +169,27 @@
       },
       "api_reset_time": {
         "name": "API-Rücksetzzeit"
+      },
+      "api_status": {
+        "name": "API-Status",
+        "state": {
+          "OK": "OK",
+          "RATE_LIMITED": "Kontingent erreicht"
+        }
+      },
+      "presence_state": {
+        "name": "Anwesenheit",
+        "state": {
+          "HOME": "Zuhause",
+          "AWAY": "Unterwegs"
+        }
+      },
+      "presence_mode": {
+        "name": "Anwesenheitsmodus",
+        "state": {
+          "MANUAL": "Manuell",
+          "AUTO": "Auto (Geofencing)"
+        }
       },
       "outdoor_temperature": {
         "name": "Außentemperatur"
@@ -230,6 +254,14 @@
       },
       "open_window": {
         "name": "Fenster offen"
+      },
+      "flow_temp_auto_adaptation": {
+        "name": "Vorlauftemperatur Auto-Anpassung"
+      }
+    },
+    "number": {
+      "max_flow_temperature": {
+        "name": "Max. Vorlauftemperatur"
       }
     },
     "button": {

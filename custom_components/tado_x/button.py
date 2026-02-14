@@ -80,11 +80,6 @@ class TadoXButton(CoordinatorEntity[TadoXDataUpdateCoordinator], ButtonEntity):
         self._attr_unique_id = f"{coordinator.home_id}_{description.key}"
 
     @property
-    def name(self) -> str:
-        """Return the name of the button."""
-        return self.entity_description.key.replace("_", " ").title()
-
-    @property
     def device_info(self) -> DeviceInfo:
         """Return device info - buttons belong to the home device."""
         return DeviceInfo(

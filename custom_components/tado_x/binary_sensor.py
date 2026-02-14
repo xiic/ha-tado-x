@@ -116,7 +116,6 @@ class TadoXRoomBinarySensor(CoordinatorEntity[TadoXDataUpdateCoordinator], Binar
         self._room_id = room_id
         self.entity_description = description
         self._attr_unique_id = f"{coordinator.home_id}_{room_id}_{description.key}"
-        self._attr_name = description.key.replace("_", " ").title()
 
     @property
     def _room(self) -> TadoXRoom | None:
@@ -169,7 +168,6 @@ class TadoXDeviceBinarySensor(CoordinatorEntity[TadoXDataUpdateCoordinator], Bin
         self.entity_description = description
         self._attr_unique_id = f"{serial_number}_{description.key}"
         # Simple name without serial suffix - device name already has it
-        self._attr_name = description.key.replace("_", " ").title()
 
     @property
     def _device(self) -> TadoXDevice | None:

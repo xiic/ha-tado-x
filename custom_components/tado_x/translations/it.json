@@ -142,11 +142,33 @@
         }
       },
       "device_temperature": { "name": "Temperatura dispositivo" },
+      "temperature_offset": { "name": "Offset temperatura" },
       "api_calls_today": { "name": "Chiamate API oggi" },
       "api_quota_remaining": { "name": "Quota API rimanente" },
       "api_quota_limit": { "name": "Limite quota API" },
       "api_usage_percentage": { "name": "Utilizzo API" },
       "api_reset_time": { "name": "Reset quota API" },
+      "api_status": {
+        "name": "Stato API",
+        "state": {
+          "OK": "OK",
+          "RATE_LIMITED": "Limite raggiunto"
+        }
+      },
+      "presence_state": {
+        "name": "Presenza",
+        "state": {
+          "HOME": "Casa",
+          "AWAY": "Fuori casa"
+        }
+      },
+      "presence_mode": {
+        "name": "Modalità presenza",
+        "state": {
+          "MANUAL": "Manuale",
+          "AUTO": "Automatico (Geofencing)"
+        }
+      },
       "outdoor_temperature": { "name": "Temperatura esterna" },
       "solar_intensity": { "name": "Intensità solare" },
       "weather_state": {
@@ -192,7 +214,11 @@
     },
     "switch": {
       "child_lock": { "name": "Blocco bambini" },
-      "open_window": { "name": "Finestra aperta" }
+      "open_window": { "name": "Finestra aperta" },
+      "flow_temp_auto_adaptation": { "name": "Adattamento auto temperatura flusso" }
+    },
+    "number": {
+      "max_flow_temperature": { "name": "Temperatura massima flusso" }
     },
     "button": {
       "boost_all": { "name": "Boost globale" },

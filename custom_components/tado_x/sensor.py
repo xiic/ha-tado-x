@@ -378,7 +378,6 @@ class TadoXHomeSensor(CoordinatorEntity[TadoXDataUpdateCoordinator], SensorEntit
         super().__init__(coordinator)
         self.entity_description = description
         self._attr_unique_id = f"{coordinator.data.home_id}_{description.key}"
-        self._attr_name = description.key.replace("_", " ").title()
 
     @property
     def device_info(self) -> DeviceInfo:
@@ -415,7 +414,6 @@ class TadoXWeatherSensor(CoordinatorEntity[TadoXDataUpdateCoordinator], SensorEn
         super().__init__(coordinator)
         self.entity_description = description
         self._attr_unique_id = f"{coordinator.data.home_id}_weather_{description.key}"
-        self._attr_name = description.key.replace("_", " ").title()
 
     @property
     def device_info(self) -> DeviceInfo:
@@ -457,7 +455,6 @@ class TadoXRoomSensor(CoordinatorEntity[TadoXDataUpdateCoordinator], SensorEntit
         self._room_id = room_id
         self.entity_description = description
         self._attr_unique_id = f"{coordinator.home_id}_{room_id}_{description.key}"
-        self._attr_name = description.key.replace("_", " ").title()
 
     @property
     def _room(self) -> TadoXRoom | None:
@@ -509,8 +506,6 @@ class TadoXDeviceSensor(CoordinatorEntity[TadoXDataUpdateCoordinator], SensorEnt
         self._serial_number = serial_number
         self.entity_description = description
         self._attr_unique_id = f"{serial_number}_{description.key}"
-        # Simple name without serial suffix - device name already has it
-        self._attr_name = description.key.replace("_", " ").title()
 
     @property
     def _device(self) -> TadoXDevice | None:
@@ -612,7 +607,6 @@ class TadoXAirComfortSensor(CoordinatorEntity[TadoXDataUpdateCoordinator], Senso
         self._room_id = room_id
         self.entity_description = description
         self._attr_unique_id = f"{coordinator.home_id}_{room_id}_{description.key}"
-        self._attr_name = description.key.replace("_", " ").title()
 
     @property
     def _air_comfort(self) -> TadoXRoomAirComfort | None:
